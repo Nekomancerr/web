@@ -1,5 +1,4 @@
 <?php
-    //this thing should be handle by admin only
     session_start();
     require_once(__DIR__ . '/define_sql.php');
 
@@ -30,7 +29,9 @@
     <title>User</title>
 </head>
 <body>
+    
     <div>USER DASHBOARD</div>
+    <br>
     <a href="logout.php">Logout</a>
 </body>
 </html>

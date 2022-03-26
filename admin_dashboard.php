@@ -40,7 +40,7 @@
             <br>
             <a href="logout.php">Logout</a>
             <a href="edit_info.php">Edit</a>
-            <a href="register.php">Add user</a>
+            <a href="add_user.php">Add user</a>
             <a href="admin_delete.php">Delete</a>
 
         </div>

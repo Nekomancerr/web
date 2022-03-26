@@ -7,8 +7,9 @@
 
     $server = "localhost";
     $username_sql = "nekomancer";
-    $username_sql_info = "user_priv";
+    //wrote for fun :-)
+    //$username_sql_info = "user_priv";
     $password_sql = "password";
-    $password_sql_info = "user_priv";
+    //$password_sql_info = "user_priv";
     $db_name = "user";
 ?>

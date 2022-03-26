@@ -21,11 +21,11 @@
     if($row["isAdmin"] == "user"){
       //has to set username variable to session variable in order for it to carry around
       $_SESSION["username"] = $username;
-      header("location:userDashboard.php");
+      header("location:userdashboard.php");
     }
     elseif($row["isAdmin"] =="admin"){
       $_SESSION['username'] = $username;
-      header("location:adminDashboard.php");
+      header("location:admin_dashboard.php");
     }
     else{
       $_POST["errorMessage"] = "Something wrong happened, please contact admin for more information."; 

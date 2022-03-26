@@ -14,13 +14,17 @@ CREATE TABLE user.user_info (
 	PRIMARY KEY(username)
 );
 
-CREATE TABLE user.user_trueinfo (
-		
+CREATE TABLE user.personal_info (
+    username VARCHAR(25) NOT NULL,
+    fname VARCHAR (10) NOT NULL,
+    lname VARCHAR (10) NOOT NULL,
+    
 );
 
 
 CREATE TABLE user.user_post (
-
+    username VARCHAR(25) NOT NULL,
+    post
 );
 
 INSERT INTO user.user_info
