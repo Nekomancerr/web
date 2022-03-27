@@ -5,23 +5,21 @@
   $db = new mysqli($server, $username_sql, $password_sql, $db_name);
   
   if($db->connect_error){
-    die("can't connect to database");
+    die("Can't connect to database");
   }
 
   if($_SERVER["REQUEST_METHOD"]=="POST"){
     $username = $_POST["uname"];
     $password = $_POST["pwd"];
-
-    //sql call 
+ 
     $sql="select * from user_info where username='".$username."' and password='".$password."'";
     $result = mysqli_query($db, $sql);
     $row=mysqli_fetch_array($result);
 
-    //check user priviledge 
+    //check priviledge 
     if($row["isAdmin"] == "user"){
-      //has to set username variable to session variable in order for it to carry around
       $_SESSION["username"] = $username;
-      header("location:userdashboard.php");
+      header("location:user_dashboard.php");
     }
     elseif($row["isAdmin"] =="admin"){
       $_SESSION['username'] = $username;
