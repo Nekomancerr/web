@@ -10,13 +10,30 @@
 
     $username = $_SESSION["username"];
 
-    $sql="select username, isAdmin from user.user_info where username='".$username."'  ";
+    $sql_check = "select username, isAdmin from user.user_info where username='".$username."'  ";
     $result = mysqli_query($db, $sql);
     $row=mysqli_fetch_array($result);
 
     //check user priviledge
     if ($row["isAdmin"] == "user") {
         die("Forbidden.");
+    }
+
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST"){
+        $username_add_sql = $_POST['username'];
+        if($_POST['password'] == $_POST['re_password']){
+            $password_add_sql = $_POST['password'];
+        }
+        $isadmin_sql = $_POST["account_type"];
+        $sql_modify = "insert into user.user_info(username, password, isAdmin) values ('".$username_add_sql."','".$password_add_sql."','".$isadmin_sql."')";
+        if ($db -> query($sql_modify)) {
+            printf("Record inserted successfully.<br />");
+         }
+         if ($db -> errno) {
+            printf("Could not insert record into table: %s<br />", $db -> error);
+         }
+        
     }
 ?>
 
@@ -30,13 +47,17 @@
 </head>
 <body>
     <center>
-    <form class="form" action="" method="post">
+    <form class="form" action="" method="POST">
         <h1 class="login-title">Registration</h1>
-        <input type="text" class="login-input" name="username" placeholder="Username" required /><br><br>
-        <input type="text" class="login-input" name="email" placeholder="Email Adress"><br><br>
-        <input type="password" class="login-input" name="password" placeholder="Password"><br><br>
-        <input type="submit" name="submit" value="Register" class="login-button"><br><br>
-        <p class="link"><a href="login.php">Click to Login</a></p>
+        <input type="text" class="login-input" name="username" placeholder="Username" require/><br><br>
+        <input type="password" class="login-input" name="password" placeholder="Password" require><br><br>
+        <input type="password" class="login-input" name="re_password" placeholder="Confirm Password" require><br><br>
+         <select name="account_type" id="account_type">
+            <option value="user">User</option>
+            <option value="admin">Admin</option>
+        </select>
+            <input type="submit" name="submit" value="Register" class="login-button"><br><br>
+        <p class="link"><a href="login.php">Click here to Login page</a></p>
     </form>
     </center>
 
