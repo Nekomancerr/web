@@ -1,7 +1,7 @@
 
 
 CREATE TABLE user.user_info (
-	username VARCHAR(25) NOT NULL,
+	username VARCHAR(25) NOT NULL PRIMARY KEY,
 	password VARCHAR(25) NOT NULL,
 	isAdmin enum('admin','user') CHARACTER SET utf8 NOT NULL,
     postid INT NOT NULL,
@@ -12,8 +12,8 @@ CREATE TABLE user.user_info (
 
 CREATE TABLE user.user_post (
     username VARCHAR(25) NOT NULL,
-    post VARCHAR(500) NOT NULL,
-
+    title VARCHAR(25),
+    post VARCHAR(255) NOT NULL
 );
 
 
