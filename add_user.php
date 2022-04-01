@@ -24,13 +24,17 @@
         $username_add_sql = $_POST['username'];
         if($_POST['password'] == $_POST['re_password']){
             $password_add_sql = $_POST['password'];
+        } else{
+            $_SESSION["error"] = "Password mismatch, please try again."; 
+            header("location:add_user.php");
+            die("password mismatch");
         }
         $isadmin_sql = $_POST["account_type"];
         $sql_modify = "insert into user.user_info(username, password, isAdmin) values ('".$username_add_sql."','".$password_add_sql."','".$isadmin_sql."')";
         if ($db -> query($sql_modify)) {
             printf("Record inserted successfully.<br />");
          }
-         if ($db -> errno) {
+        elseif ($db -> errno) {
             printf("Could not insert record into table: %s<br />", $db -> error);
          }
         
@@ -48,6 +52,12 @@
 <body>
     <center>
     <form class="form" action="" method="POST">
+
+        <?php
+            if($_SESSION["error"]){
+                echo $_SESSION["error"];
+            }
+        ?>
         <h1 class="login-title">Registration</h1>
         <input type="text" class="login-input" name="username" placeholder="Username" require/><br><br>
         <input type="password" class="login-input" name="password" placeholder="Password" require><br><br>
