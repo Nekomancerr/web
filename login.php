@@ -1,35 +1,34 @@
 <?php
-  session_start();
-  require_once(__DIR__ . '/define_sql.php');
+    session_start();
+    require_once(__DIR__ . '/define_sql.php');
 
-  $db = new mysqli($server, $username_sql, $password_sql, $db_name);
+    $db = new mysqli($server, $username_sql, $password_sql, $db_name);
   
-  if($db->connect_error){
-    die("Can't connect to database");
-  }
+    $db->connect_error ? die("Can't connect to database, try again.") : '';
 
-  if($_SERVER["REQUEST_METHOD"]=="POST"){
-    $username = $_POST["uname"];
-    $password = $_POST["pwd"];
- 
-    $sql="select * from user_info where username='".$username."' and password='".$password."'";
-    $result = mysqli_query($db, $sql);
-    $row=mysqli_fetch_array($result);
 
-    //check priviledge 
-    if($row["isAdmin"] == "user"){
-      $_SESSION["username"] = $username;
-      header("location:user_dashboard.php");
+    if($_SERVER["REQUEST_METHOD"]=="POST"){
+      $username = $_POST["uname"];
+      $password = $_POST["pwd"];
+
+      $sql="select * from user_info where username='".$username."' and password='".$password."'";
+      $result = mysqli_query($db, $sql);
+      $row = mysqli_fetch_array($result);
+      $_SESSION["isAdmin"] = $row["isAdmin"];
+
+      if($row["isAdmin"] == "user"){
+        $_SESSION["username"] = $username;
+        header("location:user_dashboard.php");
+      }
+      elseif($row["isAdmin"] =="admin"){
+        $_SESSION['username'] = $username;
+        header("location:admin_dashboard.php");
+      }
+      else{
+        $_POST["errorMessage"] = "Something wrong happened, please contact admin for more information."; 
+        header("location:#");
+      }
     }
-    elseif($row["isAdmin"] =="admin"){
-      $_SESSION['username'] = $username;
-      header("location:admin_dashboard.php");
-    }
-    else{
-      $_POST["errorMessage"] = "Something wrong happened, please contact admin for more information."; 
-      header("location:#");
-    }
-  }
 ?>
 
 
@@ -57,7 +56,7 @@
         
         <?php if ($_POST["errorMessage"] != '') { ?>
 			  	<!-- check for previous login error, just user privilege stuff -->
-          <div id="login-alert" class="alert alert-danger col-sm-12"><?php echo $errorMessage; ?></div>                            
+          <div id="login-alert" class="alert alert-danger col-sm-12"><?php echo $_POST["errorMessage"]; ?></div>                            
 			  <?php } ?>
         
         <form id="loginform" class="form-horizontal" role="form" action="#" method="POST">                      

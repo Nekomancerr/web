@@ -1,28 +1,50 @@
 <?php
-    $db = mysqli_connect("localhost", "nekomancer", "password", "user") or die("can't connect to database");
-    $username=$_POST["search"];
-    $sql="select * from user.user_info where username='$username'";
-    $rs=mysqli_query($db, $sql);
-    
-    $row=mysqli_fetch_array($rs);
-    
-    if($row)
+    session_start();
+    require_once(__DIR__ . '/define_sql.php');
+    //check login state
+    $_SESSION["username"] == '' ? die("<center><h2>Please login first.</h2></center>") : '';
 
+    $db = new mysqli($server, $username_sql, $password_sql, $db_name);
+    $db->connect_error ? die("Something's wrong, can't connect to database.") : '';
+
+    $username = $_POST["search"];
+    $sql = "select * from user.user_info where username LIKE '%$username%'";
+    
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $results = mysqli_query($db, $sql);
+        $results == '' ? printf("Something's wrong, couldn't do search."): '';
+        $row = mysqli_num_rows($results);
+    }
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search</title>
+    <style>
+        .parent { text-align: center; }
+        .parent > ul { display: inline-block; }
+    </style>
 </head>
 <body>
-    <form method="POST">
-        <label>Search</label>
-        <input type="text" name="search">
-        <input type="submit" name="submit">
-    </form>
+    <center>
+        <h2>Search page</h2><br>
+        <form method="POST">
+            <label>Enter username: </label>
+            <input type="text" name="search" placeholder="Enter username">
+            <input type="submit" name="submit">
+        </form>
+    </center>
+        <br>
+        <ul class="parent">
+            <?php if($_SERVER["REQUEST_METHOD"] == "POST"){
+                if($row){
+                    echo "<p>User found:</p>";
+                    while ($row = mysqli_fetch_array($results)){
+                        echo "<li>" . $row['username'] . "</li>";
+                    }
+                } else { echo "No match result"; }
+            } ?>
+        </ul>
 </body>
-</html> 
+</html>
