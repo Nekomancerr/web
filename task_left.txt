@@ -1,4 +1,4 @@
->post - 1
->show post - 2
+>post - 1 - done
+>show post - 2 - ??
 >check test case that could cause problem- 3
->make things pretty
+>make things pretty - probably no lol

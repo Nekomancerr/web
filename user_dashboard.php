@@ -28,6 +28,9 @@
         padding: 30px;
         font-size: 20px;
         }
+        a+a {
+        margin-left: 10px;
+        }
     </style>
 </head>
 <body>
@@ -37,8 +40,14 @@
             <ul class="centered justify-content-center">    
                 <a class="btn-1" href="post.php">Post </a>
                 <a class="btn-1" href="search.php">Search </a>
-                <a class="btn-1" href="">Show posts </a>
+                <a class="btn-1" href="post.php">Post </a>
+                <a class="btn-1" href="show_post.php">Show posts </a>
                 <a class="btn-1" href="logout.php">Logout </a> 
+                <?php
+                    //if current user is admin, add an option to go back to admin's dashboard.
+                    $_SESSION["isAdmin"] == "admin"? 
+                    printf("<p>Back to <a class=\"btn-1\" href=\"admin_dashboard.php\">Admin page.</a></p>"): '';
+                ?>
             </ul>
         </div>
     </center>

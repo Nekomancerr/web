@@ -1,9 +1,7 @@
 <?php
     //this thing should be handle by admin only
     session_start();
-    if ($_SESSION["isAdmin"] != "admin") {
-        die("Forbidden.");
-    }
+    ($_SESSION["isAdmin"] != "admin") ? die("Forbidden.") :'';
 
     require_once(__DIR__ . '/define_sql.php');
     $db = new mysqli($server, $username_sql, $password_sql, $db_name);
@@ -13,9 +11,7 @@
     $sql = "select username, isAdmin from user.user_info where username='".$username."'  ";
     $result = mysqli_query($db, $sql);
     $row = mysqli_fetch_array($result);
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -26,6 +22,9 @@
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
     <title>ADMIN</title>
     <style>
+        a+a {
+        margin-left: 10px;
+        }
         .centered {
         align-items: center;
         padding: 30px;

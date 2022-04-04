@@ -13,7 +13,6 @@
         $db -> query($sql1) & $db -> query($sql2) ? printf("Task done successfully.<br />") : printf("Could not delete user: %s<br />", $db -> error);
     }
 
-    
 ?>
 
 <!DOCTYPE html>

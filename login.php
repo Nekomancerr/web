@@ -56,7 +56,7 @@
         
         <?php if ($_POST["errorMessage"] != '') { ?>
 			  	<!-- check for previous login error, just user privilege stuff -->
-          <div id="login-alert" class="alert alert-danger col-sm-12"><?php echo $_POST["errorMessage"]; ?></div>                            
+          <div id="login-alert" class="alert alert-danger col-sm-12"><?php printf($_POST["errorMessage"]); ?></div>                            
 			  <?php } ?>
         
         <form id="loginform" class="form-horizontal" role="form" action="#" method="POST">                      
