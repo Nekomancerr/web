@@ -1,4 +1,8 @@
 >post - 1 - done
 >show post - 2 - ??
+>change user info - 3 
+> 
+>
+
 >check test case that could cause problem- 3
 >make things pretty - probably no lol

@@ -1,14 +1,12 @@
 
-
 CREATE TABLE user.user_info (
-	username VARCHAR(25) NOT NULL PRIMARY KEY,
-	password VARCHAR(25) NOT NULL,
-	isAdmin enum('admin','user') CHARACTER SET utf8 NOT NULL,
-    postid INT NOT NULL,
-	PRIMARY KEY(postid)
-);
-
-
+    username VARCHAR(25) NOT NULL PRIMARY KEY,
+    password VARCHAR(25) NOT NULL,
+    isAdmin enum('admin','user') CHARACTER SET utf8 NOT NULL,
+    fname VARCHAR(25),
+    lname VARCHAR(25),
+    phone VARCHAR(10)
+)
 
 CREATE TABLE user.user_post (
     username VARCHAR(25) NOT NULL,

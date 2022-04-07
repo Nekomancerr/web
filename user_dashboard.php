@@ -40,7 +40,7 @@
             <ul class="centered justify-content-center">    
                 <a class="btn-1" href="post.php">Post </a>
                 <a class="btn-1" href="search.php">Search </a>
-                <a class="btn-1" href="post.php">Post </a>
+                <a class="btn-1" href="edit_info.php">Edit info </a>
                 <a class="btn-1" href="show_post.php">Show posts </a>
                 <a class="btn-1" href="logout.php">Logout </a> 
                 <?php

@@ -10,9 +10,8 @@
         $delete_user= $_POST['search'];
         $sql1 = "delete from user.user_info where username='".$delete_user."'"; 
         $sql2 = "delete from user.user_post where username='".$delete_user."'";
-        $db -> query($sql1) & $db -> query($sql2) ? printf("Task done successfully.<br />") : printf("Could not delete user: %s<br />", $db -> error);
+        ($db -> query($sql1 )) && ($db -> query($sql2)) ? printf("Task done successfully.<br />") : printf("Could not delete user: %s<br />", $db -> error);
     }
-
 ?>
 
 <!DOCTYPE html>

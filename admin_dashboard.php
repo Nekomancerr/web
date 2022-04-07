@@ -5,10 +5,10 @@
 
     require_once(__DIR__ . '/define_sql.php');
     $db = new mysqli($server, $username_sql, $password_sql, $db_name);
-    $db->connect_error ? die("Can't connect to database, try again.") : '';
+    $db->connect_error? die("Can't connect to database, try again.") : '';
     $username = $_SESSION["username"];
 
-    $sql = "select username, isAdmin from user.user_info where username='".$username."'  ";
+    $sql = "select username, isAdmin from user.user_info where username='".$username."' ";
     $result = mysqli_query($db, $sql);
     $row = mysqli_fetch_array($result);
 ?>
@@ -20,7 +20,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
-    <title>ADMIN</title>
+    <title>Admin dashboard</title>
     <style>
         a+a {
         margin-left: 10px;
@@ -40,6 +40,8 @@
             <a href="logout.php">Logout</a>
             <a href="add_user.php">Add user</a>
             <a href="admin_delete.php">Delete</a><br>
+
+            <a href=""></a>
             <br>
             <p>Go to your <a href="user_dashboard.php">Homepage</a></p>
 
