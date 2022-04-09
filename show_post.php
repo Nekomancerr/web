@@ -17,9 +17,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
     <title>Edit post</title>
+    <style>
+        table, th, td { border: 1px solid black; }
+        td, th{
+            padding:10px
+        }
+        
+    </style>
 </head>
 <body>
 <center>
+    <h2>This is your post</h2><br>
     <table border=1>
         <thead>
             <tr>
@@ -31,19 +39,17 @@
             <form method="post">
             <?php
                 $display = mysqli_query($db, "select * from user.user_post where username='".$_SESSION["username"]."';");
-                $row = mysqli_fetch_array($display);
-                if($row){
-                    while($row = mysqli_fetch_array($display)){
-                        $_POST["title"] = $row["title"]?>
+                //code hom truoc co dong nay --V
+                //$row = mysqli_fetch_array($display);
+                    while($row = mysqli_fetch_array($display)){ ?>
                     <tr>
                         <td><?php echo $row["title"]; ?></td>
                         <td><?php echo $row["post"]; ?></td>
-                        <td><?php echo "<a href='edit_post.php?title=".$row["title"]."'>EDIT</a>";?></td>
-                        <td><?php echo "<a href='del_post.php?title=".$row["title"]."'>DEL</a>";?></td>
-
-                        <!-- <td><a href="del_post.php?title=">DEL</a></td> -->
+                        <td><?php echo "<a href='edit_post.php?title=".$row["title"]."'>Edit</a>";?></td>
+                        <td><?php echo "<a href='del_post.php?title=".$row["title"]."'>Delete</a>";?></td>
                     </tr>
-            <?php }} ?>
+                    <p>Return to your <a href="user_dashboard.php">Homepage</a></p>
+            <?php }?>
             </form>
         </thead>
     </table>

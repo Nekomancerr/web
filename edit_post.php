@@ -41,7 +41,7 @@
     <div>
         <form action="edit_post.php" method="POST">
             <div>
-                <!-- <div><?php echo $row[1]; ?>"></div><br><br> -->
+                <div><?php echo "$row[1]"; ?></div><br><br> 
                 <input type="hidden" name="title" id="title" value="<?php print($row[1]); ?>"></input>
                 <textarea name="edit_post" id="post" cols="100" rows="30"><?php print($row[2]);?></textarea><br>
                 <input type="submit" name="Save">
