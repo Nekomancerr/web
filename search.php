@@ -8,11 +8,12 @@
     $db->connect_error ? die("Something's wrong, can't connect to database.") : '';
 
     $username = $_POST["search"];
+    echo ("You search for ".$username);
     $sql = "select * from user.user_info where username LIKE '%$username%'";
     
     if($_SERVER["REQUEST_METHOD"] == "POST"){
         $results = mysqli_query($db, $sql);
-        $results == '' ? printf("Something's wrong, couldn't do search."): '';
+        #$results == '' ? printf("Something's wrong, couldn't do search."): '';
         $row = mysqli_num_rows($results);
     }
 ?>
@@ -31,12 +32,13 @@
         <h2>Search page</h2><br>
         <form method="POST">
             <label>Enter username: </label>
-            <input type="text" name="search" placeholder="Enter username">
+            <input type="text" name="search" placeholder="Enter username" id='search'>
             <input type="submit" name="submit">
         </form>
     </center>
         <br>
         <ul class="parent">
+            <script>document.getElementById('search');</script>
             <?php if($_SERVER["REQUEST_METHOD"] == "POST"){
                 if($row){
                     echo "<p>User found:</p>";
